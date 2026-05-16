@@ -317,7 +317,7 @@ if not milestones_df.empty:
     CP_TO_MS = {}
     for cp in CHECKPOINT_ORDER:
         ms = milestones_df.loc[milestones_df["Checkpoint"] == cp, "Milestone"].astype(str).str.strip().tolist()
-        ms = [m for m in ms if m and m.lower() != "nan"]
+        ms = [str(m).strip() for m in ms if pd.notna(m) and str(m).strip().lower() != "nan"]
         CP_TO_MS[cp] = ms
 else:
     CHECKPOINT_ORDER, CP_TO_MS = [], {}
